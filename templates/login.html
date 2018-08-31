@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}注册{% endblock %}
+
+{% block header %}
+<<link rel="stylesheet" href="{{url_for('static', filename='css/login_regist.css')}}">
+{% endblock %}
+
+
+{% block main %}
+
+<div>
+    <h3 class="title">登陆</h3>
+    <form role="form">
+        <div class="form-group">
+            <input type="text" autocomplete="off" class="form-control" name="loginname" placeholder="请输入登录名">
+        </div>
+        
+        <div class="form-group">
+            <input type="password" class="form-control" autocomplete="off" name="password" placeholder="请输入登陆密码">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">登陆</button>
+    </form>
+
+</div>
+
+
+{% endblock %}
