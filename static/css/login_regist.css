@@ -2,12 +2,13 @@
 * @Author: anchen
 * @Date:   2018-08-31 18:06:35
 * @Last Modified by:   anchen
-* @Last Modified time: 2018-08-31 18:12:35
+* @Last Modified time: 2018-09-03 17:38:28
 */
 .main-container {
-    width: 280px;
+    width: 450px;
     margin-top: 50px;
     padding: 20px 30px;
+    background-color: #fff;
 }
 .title {
     text-align: center;

@@ -1,0 +1,55 @@
+/* 
+* @Author: anchen
+* @Date:   2018-09-03 17:48:36
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-09-03 18:49:30
+*/
+
+.row-item {
+    padding: 0 15px 0 15px;
+    background-color: #fff;
+} 
+
+.list-pic {
+    width: 100%;
+    height: 120px;
+    max-height: 130px;
+
+}
+.list-item {
+    height: 150px;
+    border-bottom: 1px solid #f3f3f3;
+    padding: 15px 0 0 0;
+}
+.title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.small-content {
+    /*overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;*/
+    word-break: break-all;/*不能换行*/
+    text-overflow: ellipsis;/*显示省略号*/
+    display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 3; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/
+}
+.extra {
+    background: #fff;
+    margin: 5px 0 0 0;
+    padding: 5px 0;
+}
+.extra div {
+    padding: 0;
+}
+.extra .opration {
+    float: right;
+    margin-right: 15px;
+}
+.extra  span {
+    margin: 5px 13px 0px 0;
+    color: #aaa;
+}
