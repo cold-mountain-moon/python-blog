@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row main-row">
+    <div class="col-sm-9">
+        <div class="row-item">
+                
+            {% for article in articles %}
+            <div class="row list-item">
+                <div class="col-sm-3 hidden-xs">
+                    <img class="list-pic" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
+                </div>
+                <div class="col-sm-9">
+                    <h4><a class="title" href="{{url_for('article_detail', id=article.id)}}">{{article.title}}</a></h4>
+                    <p class="small-content">{{article.content}}</p>
+                    <div class="row extra">
+                        <div class="col-sm-8 ">
+                            <span>{{article.catogoryid}}</span>
+                            <span>{{article.createdate}}</span>
+                            <span></span>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="read" href="{{url_for('article_detail', id=article.id)}}" class="opration">阅读全文</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-3 row-item side-bar">
+        <div class="side-bar-item">
+            寒山月
+        </div>
+        <div class="side-bar-item">
+            寒山月
+        </div>
+        <div class="side-bar-item">
+            寒山月
+        </div>
+        <div class="side-bar-item">
+            寒山月
+        </div>
+      
+        <hr class="hidden-sm hidden-md hidden-lg">
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>底部内容</p>
+</div>
+<script type="text/javascript" charset="utf-8" async defer>
+
+</script>

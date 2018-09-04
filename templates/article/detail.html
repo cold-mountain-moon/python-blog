@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}文章列表{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/article.css')}}">
+{% endblock %}
+
+{% block main %}
+<script type="text/javascript">
+    
+</script>
+<div class="container">
+  <div class="row main-row">
+    <div class="col-sm-9">
+        <div class="row-item">
+            <div class="article-main">
+                <h4 class="title">{{article.title}}</h4>
+                <div class="row extra">
+                    <span>{{article.catogoryid}}</span>
+                    <span>{{article.createdate}}</span>
+                    <span></span>
+                </div>
+                <div class="article-content">
+                    {{article.content}}
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3 row-item side-bar">
+        <div class="side-bar-item">
+            寒山月
+        </div>
+        <div class="side-bar-item">
+            寒山月
+        </div>
+        <div class="side-bar-item">
+            寒山月
+        </div>
+        <div class="side-bar-item">
+            寒山月
+        </div>
+      
+        <hr class="hidden-sm hidden-md hidden-lg">
+    </div>
+</div>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>底部内容</p>
+</div>
+{% endblock %}

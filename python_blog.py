@@ -3,11 +3,11 @@
 # @Author: anchen
 # @Date:   2018-08-31 16:25:39
 # @Last Modified by:   anchen
-# @Last Modified time: 2018-09-03 12:01:23
-from flask import Flask, render_template, request, redirect, session, url_for
+# @Last Modified time: 2018-09-04 16:09:06
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify
 from exts import db
 import config
-from models import User
+from models import User, Article
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -63,6 +63,28 @@ def logout():
     #del session['user_id']
     session.clear()
     return redirect(url_for('login'))
+
+@app.route('/article/')
+def article_list():
+    articles = Article.query.all()
+    return render_template('article/list.html', articles=articles)
+
+@app.route('/article/<id>', methods=['GET'])
+def article_detail(id):
+    article = Article.query.filter(Article.id == id).first()
+    content = '<p class="small-content">' + article.content + '</p>'
+    if content:
+        split = content.split(u'\n\r\t')
+        print(len(split))
+
+        for s in split:
+            s += u'</p><p class="small-content">'
+        content = s
+        print(content)
+    if not article:
+        article = {}
+    return render_template('article/detail.html', article=article)
+   # return jsonify({'id':article.id, 'content': article.content, 'authorid': article.authorid})
 
 @app.context_processor
 def get_current_user():

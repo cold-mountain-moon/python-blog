@@ -2,7 +2,7 @@
 * @Author: anchen
 * @Date:   2018-09-03 17:48:36
 * @Last Modified by:   anchen
-* @Last Modified time: 2018-09-03 18:49:30
+* @Last Modified time: 2018-09-04 11:02:29
 */
 
 .row-item {
@@ -52,4 +52,13 @@
 .extra  span {
     margin: 5px 13px 0px 0;
     color: #aaa;
+}
+
+.side-bar {
+    background: #f3f3f3;
+    /*padding: 15px;*/
+}
+.side-bar-item {
+    background: #fff;
+    margin-bottom: 10px;
 }
