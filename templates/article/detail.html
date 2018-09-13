@@ -3,52 +3,55 @@
 {% block title %}文章列表{% endblock %}
 
 {% block header %}
+
+
+<!-- <link rel="stylesheet" href="{{url_for('static', filename='plugins/editormd/css/style.css')}}" /> -->
+<link rel="stylesheet" href="{{url_for('static', filename='plugins/editormd/css/editormd.preview.css')}}" />
+
 <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
 <link rel="stylesheet" href="{{url_for('static', filename='css/article.css')}}">
+
+<script src="{{url_for('static', filename='plugins/editormd/lib/marked.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/editormd/lib/prettify.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/editormd/lib/raphael.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/editormd/lib/underscore.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/editormd/lib/sequence-diagram.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/editormd/lib/flowchart.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/editormd/lib/jquery.flowchart.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/editormd/editormd.js')}}"></script>
 {% endblock %}
 
 {% block main %}
-<script type="text/javascript">
-    
-</script>
-<div class="container">
-  <div class="row main-row">
-    <div class="col-sm-9">
+
         <div class="row-item">
             <div class="article-main">
                 <h4 class="title">{{article.title}}</h4>
                 <div class="row extra">
-                    <span>{{article.catogoryid}}</span>
-                    <span>{{article.createdate}}</span>
+                    <span>
+                        <span class="glyphicon glyphicon-leaf" style="color: rgb(91, 170, 160);"></span>
+                        {{article.catogory.name}}
+                    </span>
+                    <span>
+                        <span class="glyphicon glyphicon-calendar" style="color: rgb(255, 140, 60);"></span>
+                        {{article.createdate}}
+                    </span>
                     <span></span>
                 </div>
-                <div class="article-content">
-                    {{article.content}}
+                <div id="article-content-editormd" class="article-content">
+                    <textarea name="">{{article.content}}</textarea>
                 </div>
-                
-
             </div>
         </div>
-    </div>
-    <div class="col-sm-3 row-item side-bar">
-        <div class="side-bar-item">
-            寒山月
-        </div>
-        <div class="side-bar-item">
-            寒山月
-        </div>
-        <div class="side-bar-item">
-            寒山月
-        </div>
-        <div class="side-bar-item">
-            寒山月
-        </div>
-      
-        <hr class="hidden-sm hidden-md hidden-lg">
-    </div>
-</div>
+        <script type="text/javascript" charset="utf-8" async defer>
+            editormd.markdownToHTML("article-content-editormd", {
+                htmlDecode      : "style,script,iframe",  
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true  // 默认不解析
+            });
 
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <p>底部内容</p>
-</div>
+        </script>
+
 {% endblock %}

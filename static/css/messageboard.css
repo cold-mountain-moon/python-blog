@@ -1,0 +1,80 @@
+/* 
+* @Author: anchen
+* @Date:   2018-09-13 16:42:54
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-09-13 18:54:26
+*/
+.row-item1 {
+    margin: 0;
+    padding: 15px;
+    background-color: #fff;
+}
+.message-now {
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.message-write {
+    min-height: 120px;
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid red;
+}
+.message-opration {
+    height: 35px;
+    border: 1px solid blue;
+    background-color: #ccc;
+}
+.message-now:empty::before{
+    color:lightgrey;
+    content:attr(placeholder);
+}
+.message-line {
+    border-bottom: 2px solid #ff7815;
+    padding: 12px;
+}
+.message-por {
+    width: 60px;
+    height: 60px;
+    margin-top: 4px;
+}
+.message-list-item {
+    border-bottom: 1px dashed #ccc;
+    padding: 12px 11px;
+}
+.msg-first-row {
+    height: 30px;
+}
+.msg-user {
+    color: #e74851;
+    font-size: 16px;
+}
+.msg-time {
+    color: #c0c0c0;
+    font-size: 14px;
+}
+.message-content {
+    margin-left: 65px;
+    padding: 10px 5px;
+}
+.msg-opr {
+    margin: 10px 0 0 15px;
+}
+.msg-reply-list-item {
+    border: 1px dashed #ccc;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.msg-reply {
+    padding: 15px 0;
+}
+.msg-reply-first-row {
+    height: 25px;
+}
+.msg-reply-user {
+    font-size: 14px;
+    color: #e74851;
+    margin: 2px;
+}
+.msg-reply-words {
+    margin: 2px 10px;
+}

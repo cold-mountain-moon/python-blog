@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}文章列表{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/messageboard.css')}}">
+{% endblock %}
+
+{% block main %}
+    <div class="row-item1">
+        <div class="message-now">
+            <div class="message-write" contenteditable="true" placeholder="说两句吧...">
+            
+            </div>
+            <div class="message-opration">
+                <div class="inline-block">aaaaa</div>
+                <div class="inline-block right">
+                    <button class="btn btn-success btn-sm">提交</button>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+        <div class="message-list">
+            <h4 class="message-line">留言列表</h4>
+        </div>
+        <div class="message-list-item">
+            <div class="message-por left">
+                <img class="message-por img-circle" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
+            </div>
+            <div class="message-content">
+                <div class="msg-first-row">
+                    <h4 class="msg-user inline-block">红叶落了</h4>
+                    <span class="msg-time inline-block right">2018-01-23 12:20:14</span>
+                    <div class="clear"></div>
+                </div>
+                <p>你的博客好美啊，我也想学做博客呢！</p>
+                <div class="message-info-opr align-right">
+                    <span class="msg-opr">
+                        <span class="glyphicon glyphicon-send" style="color: rgb(91, 170, 160);">回复</span>
+                    </span>
+                    <span class="msg-opr">
+                        <span class="glyphicon glyphicon-thumbs-up" style="color: rgb(91, 170, 160);">赞</span>
+                    </span>
+                    <span class="msg-opr">
+                        <span class="glyphicon glyphicon-thumbs-down" style="color: rgb(91, 170, 160);">踩</span>
+                    </span>
+                </div>
+                <div class="msg-reply">
+                    <div class="message-write" contenteditable="true" placeholder="说两句吧...">
+            
+                    </div>
+                    <div class="message-opration">
+                        <div class="inline-block">aaaaa</div>
+                        <div class="inline-block right">
+                            <button class="btn btn-success btn-sm">提交</button>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+         {% for i in range(10) %}       
+        <div class="message-list-item">
+            <div class="message-por left">
+                <img class="message-por img-circle" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
+            </div>
+            <div class="message-content">
+                <div class="msg-first-row">
+                    <h4 class="msg-user inline-block">红叶落了</h4>
+                    <span class="msg-time inline-block right">2018-01-23 12:20:14</span>
+                    <div class="clear"></div>
+                </div>
+                <p>你的博客好美啊，我也想学做博客呢！</p>
+                <div class="message-info-opr align-right">
+                    <span class="msg-opr">
+                        <span class="glyphicon glyphicon-send" style="color: rgb(91, 170, 160);">回复</span>
+                    </span>
+                    <span class="msg-opr">
+                        <span class="glyphicon glyphicon-thumbs-up" style="color: rgb(91, 170, 160);">赞</span>
+                    </span>
+                    <span class="msg-opr">
+                        <span class="glyphicon glyphicon-thumbs-down" style="color: rgb(91, 170, 160);">踩</span>
+                    </span>
+                </div>
+
+                <div class="msg-reply-list-item">
+                    <div class="msg-reply-content">
+                        <div class="msg-reply-first-row">
+                            <h5 class="msg-reply-user inline-block">一叶扁舟</h5>
+                            <span>回复了</span>
+                            <h5 class="msg-reply-user inline-block">红叶落了</h5>
+                            <span>:</span>
+                            <!-- <span class="msg-time inline-block right">2018-01-23 12:20:14</span>
+                            <div class="clear"></div> -->
+                        </div>
+                        <p class="msg-reply-words">
+                            过奖过奖，我也是随便做着玩的，你也可以的！
+                        </p>
+                    </div>
+                </div>
+                <div class="msg-reply-list-item">
+                    <div class="msg-reply-content">
+                        <div class="msg-reply-first-row">
+                            <h5 class="msg-reply-user inline-block">红叶落了</h5>
+                            <span>回复了</span>
+                            <h5 class="msg-reply-user inline-block">一叶扁舟</h5>
+                            <span>:</span>
+                            <!-- <span class="msg-time inline-block right">2018-01-23 12:20:14</span>
+                            <div class="clear"></div> -->
+                        </div>
+                        <p class="msg-reply-words">
+                            过奖过奖，我也是随便做着玩的，你也可以的！
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+            
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

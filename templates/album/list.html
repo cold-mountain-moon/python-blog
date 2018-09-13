@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}首页{% endblock %}
+
+{% block header %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/album.css')}}">
+
+{% endblock %}
+
+{% block main %}
+
+<div class="row-item album">
+                
+    <div class="row">
+        {% for album in range(20) %}
+        <div class="col-sm-6 col-md-3 album-list">
+            <div class="thumbnail">
+                <div style="margin:0 auto;text-align:center;">
+                    <a href="{{url_for('album_photo_list', id=1)}}">
+                        <img class="album-cover" src="{{url_for('static', filename='images/1.jpg')}}" alt="封面">
+                    </a>
+                </div>
+                <div class="caption">
+                    <h4>那一年</h4>
+                    <p>我们又在一起，很开心</p>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

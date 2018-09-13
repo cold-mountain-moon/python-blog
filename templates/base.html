@@ -34,9 +34,27 @@
                             <li class="active">
                                 <a href="{{url_for('index')}}">首页</a>
                             </li>
-                            <li>
-                                <a href="{{url_for('article_list')}}">个人随笔</a>
+                            {% for catogory in main_catogories %}
+                                <li class="">
+                                    <a href="{{url_for('article_list',catogoryid=catogory.id)}}">{{catogory.name}}</a>
+                                </li>
+                            {% endfor %}
+                            <li class="">
+                                <a href="{{url_for('album_list')}}">程序不止</a>
                             </li>
+                            <li class="">
+                                <a href="{{url_for('album_list')}}">我的相册</a>
+                            </li>
+                            <li class="">
+                                <a href="{{url_for('album_list')}}">文艺一下</a>
+                            </li>
+                            <li class="">
+                                <a href="{{url_for('album_list')}}">个人随笔</a>
+                            </li>
+                            <li class="">
+                                <a href="{{url_for('message_board_list')}}">留言板</a>
+                            </li>
+                            
                         </ul>
                         <form class="navbar-form navbar-left">
                             <div class="form-group">
@@ -44,22 +62,170 @@
                             </div>
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
-                        <ul class="nav navbar-nav navbar-right">
-                            {% if user %}
-                                <li><a href="#">{{ user.name }}</a></li>
-                                <li><a href="{{url_for('logout')}}">注销</a></li>
-                            {% else %}
-                                <li><a href="{{url_for('login')}}">登陆</a></li>
-                                <li><a href="{{url_for('regist')}}">注册</a></li>
-                            {% endif %}
-                            
-                        </ul>
+                        
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </div>
         </nav>
         <div class="main-container container">
-            {% block main %}{% endblock %}
+            <div class="container">
+                <div class="row main-row">
+                    <div class="col-sm-12">
+                        <h4 class="p-content" style="background-color:#fff;">位置： 首页</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-container container">
+            <div class="container">
+                <div class="row main-row">
+                    <div class="col-sm-9">
+                        {% block main %}{% endblock %}
+                    </div>
+                    <div class="col-sm-3 side-bar">
+                        <div class="side-bar-item">
+                            <div>
+                                <div style="width:60px;height:60px;margin:0 auto;">
+                                    <img class="img-circle" width="60" height="60" src="/static/images/10.jpg" alt="">
+                                </div>
+                                <div class="row" style="padding: 5px 15px;">
+                                    
+                                    <p class="col-sm-12" style="line-height:20px;height:20px;text-align:center;">寒山月</p>
+                                    
+                                </div>
+                                <div class="info">
+                                    <p class="sign">博主：</p>
+                                    <p class="sign-content"> 寒山月</p>
+                                    
+                                </div>
+                                <div class="info">
+                                    <p class="sign">邮箱：</p>
+                                    <p class="sign-content"> 2439730644@qq.com</p>
+                                    
+                                </div>
+                                <div class="info">
+                                    <p class="sign">qq:</p>
+                                    <p class="sign-content"> 2439730644</p>
+                                    
+                                </div>
+                                <div class="info">
+                                    <p class="sign">简介:</p>
+                                    <p class="sign-content"> 一个简单善良的码农,喜欢小动物，超有爱心的卵蓝一枚...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="side-bar-item">
+                            <h4 class="s-b-title">最新发布</h4>
+                            <ul class="s-b-content list-group">
+                                <li class="list-group-item">
+                                    <a href="#">免费域名注册</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">免费域名注册</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">免费域名注册是怎么申请服务器空间还有域名备案要怎么弄呢</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">新</span>
+                                    <a href="#">免费域名注册</a>
+                                </li>
+                                <li class="list-group-item">每年更新成本</li>
+                                <li class="list-group-item">
+                                    <span class="badge">新</span>
+                                    折扣优惠
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="side-bar-item">
+                            <h4 class="s-b-title">文章分类</h4>
+                            <ul class="s-b-content list-group">
+                                <li class="list-group-item">
+                                    <a href="#">javascript(21)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">python(6)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">个人随笔(15)</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="side-bar-item">
+                            <h4 class="s-b-title">标签云</h4>
+                            <div id="s-b-tags" class="s-b-content s-b-tags">
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript(20)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python(12)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔(124)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
+
+                            </div>
+                        </div>
+                        <div class="side-bar-item">
+                            <h4 class="s-b-title">归档</h4>
+                            <ul class="s-b-content list-group">
+                                <li class="list-group-item">
+                                    <a href="#">2018年9月(2)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">2018年8月(2)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">2018年7月(4)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">2018年6月(4)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">2018年4月(3)</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                      
+                        <hr class="hidden-sm hidden-md hidden-lg">
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $(function() {
+                    randomTagsBackground();
+                });
+                function randomTagsBackground() {
+                    var background_classes = ['bg-primary', 'bg-success', 'bg-info', 'bg-warning', 'bg-danger', 'bg-secondary'];
+                    var text_classes = ['text-white'];
+                    var $tags = $("#s-b-tags").find("a");
+                    var len = $tags.length;
+
+                    for(var i=0; i<=len; i++) {
+                        var backgroundRandomIndex = Math.floor(Math.random() * background_classes.length);
+                        var textColorRandomIndex = Math.floor(Math.random() * text_classes.length)
+                        $tags.eq(i).addClass(background_classes[backgroundRandomIndex]).addClass(text_classes[textColorRandomIndex]);
+                    }
+                }
+            </script>
+
+            <!-- <div class="jumbotron text-center" style="margin-bottom:0">
+              <p>底部内容</p>
+            </div> -->
         </div>
         
         <script type="text/javascript" charset="utf-8">
@@ -67,6 +233,9 @@
                 var $this = $(this);
                 $this.addClass('active').siblings().removeClass('active');
             });
+            //test();
+            
+            
         </script>
     </body>
 </html>

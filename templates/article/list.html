@@ -3,9 +3,33 @@
 {% block title %}文章列表{% endblock %}
 
 {% block header %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/article.css')}}">
 {% endblock %}
 
 {% block main %}
-    {% include 'main.html'%}
+    <div class="row-item">
+                
+        {% for article in articles %}
+        <div class="row list-item">
+            <div class="col-sm-3 hidden-xs">
+                <img class="list-pic" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
+            </div>
+            <div class="col-sm-9">
+                <h4><a class="title" href="{{url_for('article_detail', id=article.id)}}">{{article.title}}</a></h4>
+                <p class="small-content">{{article.content}}</p>
+                <div class="row extra">
+                    <div class="col-sm-8 ">
+                        <span>{{article.catogory.name}}</span>
+                        <span>{{article.createdate}}</span>
+                        <span></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="read" href="{{url_for('article_detail', id=article.id)}}" class="opration">阅读全文</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
