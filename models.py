@@ -3,7 +3,7 @@
 # @Author: anchen
 # @Date:   2018-08-31 16:36:57
 # @Last Modified by:   anchen
-# @Last Modified time: 2018-09-12 13:58:11
+# @Last Modified time: 2018-09-21 17:54:22
 
 import datetime
 from exts import db
@@ -15,6 +15,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     loginname = db.Column(db.String(32), unique = True, nullable = False)
     name = db.Column(db.String(64), nullable = False)
+    email = db.Column(db.String(32))
+    roletype = db.Column(db.String(1), nullable = False)
     telephone = db.Column(db.String(11), nullable = False)
     password = db.Column(db.String(127), nullable = False)
     sex = db.Column(db.String(1), nullable = False)
@@ -42,13 +44,22 @@ class Catogory(db.Model):
     __tablename__ = 'catogory'
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String(64), nullable = False, unique = True)
+    order = db.Column(db.Integer)
+    route = db.Column(db.String(127), nullable = False)
     createdate = db.Column(db.DateTime, nullable = False)
     updatedate = db.Column(db.DateTime)
 
-    def __init__(self, name):
+    def __init__(self, name, order=0, route='index'):
         self.createdate = datetime.datetime.now()
         self.updatedate = datetime.datetime.now()
+        self.route = route
+        self.order = order
         self.name = name
+
+article_tag = db.Table('article_tag',
+    db.Column('articleid', db.Integer, db.ForeignKey('article.id'), primary_key = True),
+    db.Column('tagid', db.Integer, db.ForeignKey('tag.id'), primary_key = True)
+)
 
 class Tag(db.Model):
     __tablename__ = 'tag'
@@ -56,6 +67,11 @@ class Tag(db.Model):
     name = db.Column(db.String(32), nullable = False, unique = True)
     createdate = db.Column(db.DateTime, nullable = False)
     updatedate = db.Column(db.DateTime, nullable = False)
+
+    def __init__(self, name):
+        self.name = name
+        self.createdate = datetime.datetime.now()
+        self.updatedate = datetime.datetime.now()
 
 
 class Article(db.Model):
@@ -70,6 +86,7 @@ class Article(db.Model):
 
     author = db.relationship('User', backref=db.backref('articles'))
     catogory = db.relationship('Catogory', backref=db.backref('articles'))
+    tags = db.relationship('Tag', secondary='article_tag', backref=db.backref('articles'))
 
     def __init__(self, title, authorid, catogoryid, content):
         self.title = title
@@ -129,4 +146,40 @@ class Emotion(db.Model):
         self.createdate = datetime.datetime.now()
         self.updatedate = datetime.datetime.now()
 
+class Comment(db.Model):
+    __tablename__ = 'comment'
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    # 类型： 1(文章评论)， 2(留言)
+    commenttype = db.Column(db.String(1), nullable = False)
+    articleid = db.Column(db.Integer, db.ForeignKey('article.id'))
+    content = db.Column(db.String(1024), nullable = False)
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+    createdate = db.Column(db.DateTime, nullable = False)
+    updatedate = db.Column(db.DateTime, nullable = False)
+
+    article = db.relationship('Article', backref = db.backref('comments'))
+    user = db.relationship('User', backref = db.backref('comments'))
+
+    def __init__(self, commenttype, content):
+        self.content = content
+        self.commenttype = commenttype
+        self.createdate = datetime.datetime.now()
+        self.updatedate = datetime.datetime.now()
+
+
+class Reply(db.Model):
+    __tablename__ = 'reply'
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    content = db.Column(db.String(1024), nullable = False)
+    commentid = db.Column(db.Integer, db.ForeignKey('comment.id'))
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+    createdate = db.Column(db.DateTime, nullable = False)
+    updatedate = db.Column(db.DateTime, nullable = False)
+
+    comment = db.relationship('Comment', backref = db.backref('replies'))
+
+    def __init__(self, content):
+        self.content = content
+        self.createdate = datetime.datetime.now()
+        self.updatedate = datetime.datetime.now()
 

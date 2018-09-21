@@ -3,7 +3,7 @@
 # @Author: anchen
 # @Date:   2018-08-31 16:25:39
 # @Last Modified by:   anchen
-# @Last Modified time: 2018-09-13 16:39:04
+# @Last Modified time: 2018-09-21 17:58:33
 from flask import Flask, render_template, request, redirect, session, url_for, jsonify, g
 from exts import db
 import config
@@ -13,11 +13,13 @@ app = Flask(__name__)
 app.config.from_object(config)
 db.init_app(app)
 
+file_server_show = app.config['FILE_SERVER'] + app.config['FILE_SERVER_SHOW']
+
 
 @app.route('/')
 def index():
-    
-    return render_template('index.html', main_catogories=g.main_catogories)
+    articles = Article.query.all()
+    return render_template('index.html', articles = articles)
 
 @app.route('/regist/', methods=['GET', 'POST'])
 def regist():
@@ -49,7 +51,6 @@ def login():
         loginname = form['loginname']
         password = form['password']
         user = User.query.filter(User.loginname==loginname, User.password==password).first()
-        print(user)
         if user:
             session['user_id'] = user.id
             #session.permanent = True
@@ -74,26 +75,31 @@ def article_list(catogoryid):
 @app.route('/article/<id>', methods=['GET'])
 def article_detail(id):
     article = Article.query.filter(Article.id == id).first()
-    print('===================55555555555')
     return render_template('article/detail.html', article=article)
 
 @app.route('/album/', methods = ['GET'])
 def album_list():
     albums = Album.query.all()
-    return render_template('album/list.html', albums = albums)
+    return render_template('album/list.html', albums = albums, file_server=file_server_show)
 
 @app.route('/album/photo/<id>')
 def album_photo_list(id):
     photos = Photo.query.filter(Photo.albumid == id)
     return render_template('photo/list.html', photos = photos)
 
-@app.route('/message/board/')
+@app.route('/message/board/', methods = ['GET', 'POST'])
 def message_board_list():
-    return render_template('messageboard/list.html')
+    if request.method == 'GET':
+        return render_template('messageboard/list.html')
+    else:
+        form = request.form
+        
+        return jsonify({"error": 0, "msg": '评论成功!'})
+
 
 @app.context_processor
 def every_request():
-    result = {'main_catogories': g.main_catogories}
+    result = {'main_catogories': g.main_catogories, 'tags_cloud': g.tags_cloud, 'article_catogories': g.article_catogories}
     user_id = session.get('user_id')
 
     if user_id:
@@ -104,11 +110,18 @@ def every_request():
 @app.before_request
 def first_request():
     if not hasattr(g, 'main_catogories'):
-        catogories = Catogory.query.all()
-        catogories = filter(lambda catogory: len(catogory.articles) > 0, catogories)
+        catogories = Catogory.query.order_by('order').all()
         setattr(g, 'main_catogories', catogories)
+    if not hasattr(g, 'tags_cloud'):
+        tags = Tag.query.all()
+        setattr(g, 'tags_cloud', tags)
+    if not hasattr(g, 'article_catogories'):
+        article_catogories = Catogory.query.filter(Catogory.route=='article_list')
+        setattr(g, 'article_catogories', article_catogories)
+
+
 
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(threaded=True)

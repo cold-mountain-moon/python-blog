@@ -4,22 +4,58 @@
 
 {% block header %}
 <link rel="stylesheet" href="{{url_for('static', filename='css/messageboard.css')}}">
+    <style type="text/css">
+    
+    </style>
 {% endblock %}
 
 {% block main %}
+    
     <div class="row-item1">
         <div class="message-now">
-            <div class="message-write" contenteditable="true" placeholder="说两句吧...">
-            
-            </div>
+            <textarea class="message-write" id="saytext" name="saytext"></textarea> 
             <div class="message-opration">
-                <div class="inline-block">aaaaa</div>
+                <div class="inline-block">
+                    <button id="btn" class="emotion btn btn-sm btn-default">:)</button>
+                </div>
                 <div class="inline-block right">
-                    <button class="btn btn-success btn-sm">提交</button>
+                    <button id="submit-comment" class="btn btn-success btn-sm">提交</button>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="visitor-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            您的信息
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="email">邮箱:</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="请填写您的邮箱地址">
+                        </div>
+                        <div class="form-group">
+                            <label for="nickname">昵称:</label>
+                            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="请填写您的昵称">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" 
+                                data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            提交更改
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         
         <div class="message-list">
             <h4 class="message-line">留言列表</h4>
@@ -122,4 +158,31 @@
         </div>
         {% endfor %}
     </div>
+    <script type="text/javascript" src="{{url_for('static', filename='plugins/qqFace/js/jquery.qqFace.js')}}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.emotion').qqFace({ 
+                assign:'saytext', //给输入框赋值 
+                path:'http://127.0.0.1:8002/show/images/qqFace/'    //表情图片存放的路径 
+            }); 
+            $("#submit-comment").click(function() {
+                $("#visitor-info").modal('show');
+                // alert($("#saytext").val());
+                // var content = $("#saytext").val();
+                // var postUrl = "{{url_for('message_board_list')}}"
+                // $.post(postUrl, {content: content}, function(data) {
+                //     alert(data.error);
+                // }, 'json');
+            });
+        });
+        function replace_em(str){ 
+            str = str.replace(/</g,'<；'); 
+            str = str.replace(/>/g,'>；'); 
+            str = str.replace(/[\n\t\r]/g,'<；br/>；'); 
+            str = str.replace(/[em_([0-9]*)]/g,'<img src="face/$1.gif" border="0" />'); 
+            return str; 
+        }
+
+        
+    </script>
 {% endblock %}

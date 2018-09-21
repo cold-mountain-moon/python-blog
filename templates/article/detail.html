@@ -35,7 +35,12 @@
                         <span class="glyphicon glyphicon-calendar" style="color: rgb(255, 140, 60);"></span>
                         {{article.createdate}}
                     </span>
-                    <span></span>
+                    <span>
+                        <span class="glyphicon glyphicon-tag" style="color: rgb(255, 140, 60);"></span>
+                        {% for tag in article.tags %}
+                        {{tag.name}}、
+                        {% endfor %}
+                    </span>
                 </div>
                 <div id="article-content-editormd" class="article-content">
                     <textarea name="">{{article.content}}</textarea>

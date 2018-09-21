@@ -36,10 +36,14 @@
                             </li>
                             {% for catogory in main_catogories %}
                                 <li class="">
-                                    <a href="{{url_for('article_list',catogoryid=catogory.id)}}">{{catogory.name}}</a>
+                                    {% if catogory.route == 'article_list' %}
+                                    <a href="{{url_for(catogory.route,catogoryid=catogory.id)}}">{{catogory.name}}</a>
+                                    {% else %}
+                                    <a href="{{url_for(catogory.route)}}">{{catogory.name}}</a>
+                                    {% endif %}
                                 </li>
                             {% endfor %}
-                            <li class="">
+                            <!-- <li class="">
                                 <a href="{{url_for('album_list')}}">程序不止</a>
                             </li>
                             <li class="">
@@ -53,7 +57,7 @@
                             </li>
                             <li class="">
                                 <a href="{{url_for('message_board_list')}}">留言板</a>
-                            </li>
+                            </li> -->
                             
                         </ul>
                         <form class="navbar-form navbar-left">
@@ -140,42 +144,19 @@
                         <div class="side-bar-item">
                             <h4 class="s-b-title">文章分类</h4>
                             <ul class="s-b-content list-group">
+                                {% for a_catogory in article_catogories %}
                                 <li class="list-group-item">
-                                    <a href="#">javascript(21)</a>
+                                    <a href="#">{{a_catogory.name}}({{a_catogory.articles|count}})</a>
                                 </li>
-                                <li class="list-group-item">
-                                    <a href="#">python(6)</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">个人随笔(15)</a>
-                                </li>
-                                
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="side-bar-item">
                             <h4 class="s-b-title">标签云</h4>
                             <div id="s-b-tags" class="s-b-content s-b-tags">
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript(20)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python(12)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔(124)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>java(5)</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>javascript</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>python</a>
-                                <a href="#"><span class="glyphicon glyphicon-tag"></span>个人随笔</a>
-
+                                {% for tag in tags_cloud %}
+                                <a href="#"><span class="glyphicon glyphicon-tag"></span>{{tag.name}}({{tag.articles|count}})</a>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="side-bar-item">

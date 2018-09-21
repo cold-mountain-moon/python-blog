@@ -11,25 +11,36 @@
                 
         {% for article in articles %}
         <div class="row list-item">
-            <div class="col-sm-3 hidden-xs">
-                <img class="list-pic" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
-            </div>
-            <div class="col-sm-9">
-                <h4><a class="title" href="{{url_for('article_detail', id=article.id)}}">{{article.title}}</a></h4>
-                <p class="small-content">{{article.content}}</p>
-                <div class="row extra">
-                    <div class="col-sm-8 ">
-                        <span>{{article.catogory.name}}</span>
-                        <span>{{article.createdate}}</span>
-                        <span></span>
+                    <div class="col-sm-3 hidden-xs">
+                        <img class="list-pic" src="static/images/1.jpg'" alt="图片1">
                     </div>
-                    <div class="col-sm-4">
-                        <a class="read" href="{{url_for('article_detail', id=article.id)}}" class="opration">阅读全文</a>
+                    <div class="col-sm-9">
+                        <h4>
+                            <a class="title" href="{{url_for('article_detail', id=article.id)}}">{{article.title}}</a>
+                        </h4>
+                        <p class="small-content">{{article.content}}</p>
+                        <div class="row extra">
+                            <div class="col-sm-12 ">
+                                    <span style="color: rgb(91, 170, 160);" class="glyphicon glyphicon-user">
+                                        {{article.author.name}}
+                                    </span>
+                                    <span class="glyphicon glyphicon-calendar" style="color: rgb(91, 170, 160);">
+                                        {{article.createdate}}
+                                    </span>
+                                    <span class="glyphicon glyphicon-leaf" style="color: rgb(91, 170, 160);">
+                                        {{article.catogory.name}}
+                                    </span>
+                                    <span class="glyphicon glyphicon-tag" style="color: rgb(91, 170, 160);">
+                                        {% for tag in article.tags %}
+                                        {{tag.name}}
+                                        {% endfor %}
+                                    </span>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
                 </div>
-                
-            </div>
-        </div>
         {% endfor %}
     </div>
 {% endblock %}

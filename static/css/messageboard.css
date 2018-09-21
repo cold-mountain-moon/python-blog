@@ -2,7 +2,7 @@
 * @Author: anchen
 * @Date:   2018-09-13 16:42:54
 * @Last Modified by:   anchen
-* @Last Modified time: 2018-09-13 18:54:26
+* @Last Modified time: 2018-09-21 16:51:48
 */
 .row-item1 {
     margin: 0;
@@ -15,14 +15,21 @@
 }
 .message-write {
     min-height: 120px;
-    border-radius: 6px;
+    border-radius: 6px 6px 0 0;
     padding: 10px;
     border: 1px solid red;
+    display: block;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
 }
 .message-opration {
-    height: 35px;
-    border: 1px solid blue;
-    background-color: #ccc;
+    height: 30px;
+    border: 1px solid red;
+    border-top: 0;
+    border-radius: 0 0 6px 6px;
+    padding-bottom: 0;
+    background-color: #d9edf7
 }
 .message-now:empty::before{
     color:lightgrey;
@@ -43,6 +50,16 @@
 }
 .msg-first-row {
     height: 30px;
+}
+#facebox {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+#facebox td {
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+    text-align: center;
 }
 .msg-user {
     color: #e74851;

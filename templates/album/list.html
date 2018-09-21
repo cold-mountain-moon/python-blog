@@ -13,12 +13,12 @@
 <div class="row-item album">
                 
     <div class="row">
-        {% for album in range(20) %}
+        {% for album in albums %}
         <div class="col-sm-6 col-md-3 album-list">
             <div class="thumbnail">
                 <div style="margin:0 auto;text-align:center;">
                     <a href="{{url_for('album_photo_list', id=1)}}">
-                        <img class="album-cover" src="{{url_for('static', filename='images/1.jpg')}}" alt="封面">
+                        <img class="album-cover" src="{{file_server+album.cover}}" alt="封面">
                     </a>
                 </div>
                 <div class="caption">

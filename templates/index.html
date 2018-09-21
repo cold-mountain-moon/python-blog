@@ -39,103 +39,42 @@
 
 
             <div class="row-item">
-                    
+                
                 {% for article in articles %}
                 <div class="row list-item">
                     <div class="col-sm-3 hidden-xs">
-                        <img class="list-pic" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
+                        <img class="list-pic" src="static/images/1.jpg'" alt="图片1">
                     </div>
                     <div class="col-sm-9">
-                        <h4><a class="title" href="{{url_for('article_detail', id=article.id)}}">{{article.title}}</a></h4>
+                        <h4>
+                            <a class="title" href="{{url_for('article_detail', id=article.id)}}">{{article.title}}</a>
+                        </h4>
                         <p class="small-content">{{article.content}}</p>
                         <div class="row extra">
-                            <div class="col-sm-8 ">
-                                <span>{{article.catogory.name}}</span>
-                                <span>{{article.createdate}}</span>
-                                <span></span>
+                            <div class="col-sm-12 ">
+                                    <span style="color: rgb(91, 170, 160);" class="glyphicon glyphicon-user">
+                                        {{article.author.name}}
+                                    </span>
+                                    <span class="glyphicon glyphicon-calendar" style="color: rgb(91, 170, 160);">
+                                        {{article.createdate}}
+                                    </span>
+                                    <span class="glyphicon glyphicon-leaf" style="color: rgb(91, 170, 160);">
+                                        {{article.catogory.name}}
+                                    </span>
+                                    <span class="glyphicon glyphicon-tag" style="color: rgb(91, 170, 160);">
+                                        {% for tag in article.tags %}
+                                        {{tag.name}}
+                                        {% endfor %}
+                                    </span>
                             </div>
-                            <div class="col-sm-4">
-                                <a class="read" href="{{url_for('article_detail', id=article.id)}}" class="opration">阅读全文</a>
-                            </div>
+                            
                         </div>
                         
                     </div>
                 </div>
                 {% endfor %}
-                <div class="row list-item">
-                    <div class="col-sm-3 hidden-xs">
-                        <img class="list-pic" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
-                    </div>
-                    <div class="col-sm-9">
-                        <h4><a class="title" href="">python flask快速搭建博客网站</a></h4>
-                        <p class="small-content">豫章故郡，洪都新府，新分一阵地接衡庐，襟三江而带五湖，控蛮劲而引殴越，物华天宝，龙光射牛斗之墟，人杰地灵，徐孺下陈蕃之榻</p>
-                        <div class="row extra">
-                            <div class="col-sm-12 ">
-                                <span>
-                                    <span style="color: rgb(255, 140, 60);" class="glyphicon glyphicon-user">
-                                    </span>寒山月
-                                </span>
-                                <span>
-                                    <span class="glyphicon glyphicon-calendar" style="color: rgb(255, 140, 60);"></span>2018-04-25 12:10:20
-                                </span>
-                                <span>
-                                     <span class="glyphicon glyphicon-leaf" style="color: rgb(91, 170, 160);"></span>javascript   
-                                </span>
-                            </div>
-                            <!-- <div class="col-sm-4">
-                                <a class="read" href="" class="opration">阅读全文</a>
-                            </div> -->
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="row list-item">
-                    <div class="col-sm-3 hidden-xs">
-                        <img class="list-pic" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
-                    </div>
-                    <div class="col-sm-9">
-                        <h4><a class="title" href="">python flask快速搭建博客网站</a></h4>
-                        <p class="small-content">豫章故郡，洪都新府，新分一阵地接衡庐，襟三江而带五湖，控蛮劲而引殴越，物华天宝，龙光射牛斗之墟，人杰地灵，徐孺下陈蕃之榻</p>
-                        <div class="row extra">
-                            <div class="col-sm-8 ">
-                                <span><span style="color: rgb(255, 140, 60);" class="glyphicon glyphicon-user"></span>寒山月</span>
-                                <span><span class="glyphicon glyphicon-calendar" style="color: rgb(255, 140, 60);"></span>2018-04-25 12:10:20</span>
-                                <span></span>
-                                <span>
-                                     <span class="glyphicon glyphicon-leaf" style="color: rgb(91, 170, 160);"></span>javascript   
-                                </span>
-                            </div>
-                            <!-- <div class="col-sm-4">
-                                <a class="read" href="" class="opration">阅读全文</a>
-                            </div> -->
-                        </div>
-                        
-                    </div>
-                </div><div class="row list-item">
-                    <div class="col-sm-3 hidden-xs">
-                        <img class="list-pic" src="{{url_for('static', filename='images/1.jpg')}}" alt="图片1">
-                    </div>
-                    <div class="col-sm-9">
-                        <h4><a class="title" href="">python flask快速搭建博客网站</a></h4>
-                        <p class="small-content">豫章故郡，洪都新府，新分一阵地接衡庐，襟三江而带五湖，控蛮劲而引殴越，物华天宝，龙光射牛斗之墟，人杰地灵，徐孺下陈蕃之榻</p>
-                        <div class="row extra">
-                            <div class="col-sm-8 ">
-                                <span><span style="color: rgb(255, 140, 60);" class="glyphicon glyphicon-user"></span>寒山月</span>
-                                <span><span class="glyphicon glyphicon-calendar" style="color: rgb(255, 140, 60);"></span>2018-04-25 12:10:20</span>
-                                <span></span>
-                                <span>
-                                     <span class="glyphicon glyphicon-leaf" style="color: rgb(91, 170, 160);"></span>javascript   
-                                </span>
-                            </div>
-                            <!-- <div class="col-sm-4">
-                                <a class="read" href="" class="opration">阅读全文</a>
-                            </div> -->
-                        </div>
-                        
-                    </div>
-                </div>
-
             </div>
+                
             <div class="row-item page">
                 <ul class="pagination pagination-lg">
                     <li><a href="#">&laquo;</a></li>
